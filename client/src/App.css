@@ -9,6 +9,12 @@
 .App{
   background-color: #272822;
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-x: hidden;
+  scrollbar-width: none; 
+}
+
+.App::-webkit-scrollbar {
+  display: none;
 }
 
