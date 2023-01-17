@@ -1,24 +1,12 @@
-import { useState , useEffect} from 'react'
 import './App.css'
-import Header from './components/Header';
-import Posts from './components/Posts';
+import Navbar from './components/Navbar'
 
 function App() { 
 
-  const [posts, setPosts] = useState([])
   
-  useEffect(()=>{
-    const fetchPosts = async ()=>{
-      const response = await fetch('http://localhost:3000/posts');
-      console.log(response)
-    }
-    fetchPosts()
-  },[])
-
   return (
-    <div className="App">
-      <Header />      
-        <Posts posts = {posts}/>           
+    <div className="App">   
+      <Navbar />           
     </div>
   )
 }
