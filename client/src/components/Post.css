@@ -1,0 +1,43 @@
+.post {
+    width: 380px;
+    margin: 0 25px 40px 25px;
+}
+.postImg {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+.postInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.postCategories{ 
+    margin-top: .5rem;
+}
+.postCategory {
+    margin: 1rem;
+    cursor: pointer;
+    color:#E7B05F;
+}
+.postTitle {
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+    margin:1rem;
+}
+
+.postDate {
+    font-style: italic;
+}
+.postDescription {
+   line-height: 15px;
+   margin-top: 15px;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 4;
+   -webkit-box-orient: vertical;
+}
