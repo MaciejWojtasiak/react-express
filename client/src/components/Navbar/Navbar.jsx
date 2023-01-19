@@ -1,6 +1,8 @@
 import "./Navbar.css";
+import {Link} from "react-router-dom";
 
 function Navbar() {
+    const user = false;
   return (
     <div className="navbar">
         <div className="navLeft">
@@ -9,16 +11,22 @@ function Navbar() {
             <i className="navLeftItem fa-brands fa-instagram"></i>
         </div>
         <div className="navCenter">
-            <ul className="navList">
-                <li className="navListItem">HOME</li>
-                <li className="navListItem">ABOUT</li>
-                <li className="navListItem">CONTACT</li>
-                <li className="navListItem">WRITE</li>
-                <li className="navListItem">LOGOUT</li>
+            <ul className="navList">                
+                <li className="navListItem"><Link to='/' className="link">HOME</Link></li>
+                <li className="navListItem"><Link to='/about' className="link">ABOUT</Link></li>
+                <li className="navListItem"><Link to='/contact' className="link">CONTACT</Link></li>
+                <li className="navListItem"><Link to='/write' className="link">{user && "WRITE"}</Link></li>
+                <li className="navListItem"><Link to='/logout' className="link">{user && "LOGOUT"}</Link></li>
             </ul>
         </div>
         <div className="navRight">
-            <img src="https://media.istockphoto.com/id/1226886130/photo/3d-illustration-of-smiling-happy-man-with-laptop-sitting-in-armchair-cartoon-businessman.jpg?b=1&s=612x612&w=0&k=20&c=3l2mvXVqrSiU3593B897Yk-WYtpZ3xJhnmqI22dVhYQ=" alt="avatar" />
+            {user ? (<img src="https://media.istockphoto.com/id/1226886130/photo/3d-illustration-of-smiling-happy-man-with-laptop-sitting-in-armchair-cartoon-businessman.jpg?b=1&s=612x612&w=0&k=20&c=3l2mvXVqrSiU3593B897Yk-WYtpZ3xJhnmqI22dVhYQ=" alt="avatar" />) : (
+                <>
+                    <Link className="link" to="/login">LOGIN</Link>
+                    <Link className="link" to="/register">REGISTER</Link>
+                </>
+            )}
+            
             <i className="navSearchIcon fa-solid fa-magnifying-glass"></i>
         </div>
     </div>

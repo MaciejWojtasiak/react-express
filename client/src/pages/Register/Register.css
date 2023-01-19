@@ -1,0 +1,57 @@
+.register{
+    width: 100%;
+    height: calc(100% - 50px);
+    background-image: url('/src/assets/login_bgc_2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.registerForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;   
+}
+.registerForm > * {
+    color: #000;
+}
+.registerTitle {
+    font-size: 6rem;
+    margin-bottom: 2rem;
+}
+.registerTitle, .registerButton {
+    align-self: center;
+}
+
+.registerInput{
+    margin:.5rem 0;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+}
+
+.registerButton {
+    margin-top: .5rem;
+    padding: .8rem 2rem;
+    border: none;
+    border-radius: 10px;
+    color: #fff;   
+    background-color: teal;
+    cursor: pointer;
+}
+.loginBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: .5rem 1rem;
+    border:none;
+    border-radius: 8px;
+    color: #fff;
+    background-color: #D87274;
+    cursor: pointer;
+}

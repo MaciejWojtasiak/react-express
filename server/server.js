@@ -10,6 +10,21 @@ const postsRoute = require('./routes/posts');
 const categoriesRoute = require('./routes/categories');
 app.use(cors({ origin: "http://localhost:5173" }))
 app.use(express.json())
+const multer = require("multer");
+
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "images")
+    }, filename: (req, file, cb) => {
+        cb(null, req.body.name)
+    }
+})
+
+const upload = multer({ storage: storage })
+app.post('/upload', upload.single("file"), (req, res) => {
+    res.status(200).json("File upoladed.");
+})
 
 
 app.use('/auth', authRoute)
