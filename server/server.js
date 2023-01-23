@@ -24,13 +24,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 app.post('/upload', upload.single("file"), (req, res) => {
     res.status(200).json("File upoladed.");
-})
+});
 
-
-app.use('/auth', authRoute)
-app.use('/users', usersRoute)
-app.use('/posts', postsRoute)
-app.use('/categories', categoriesRoute)
+app.use('/auth', authRoute);
+app.use('/users', usersRoute);
+app.use('/posts', postsRoute);
+app.use('/categories', categoriesRoute);
 
 
 mongoose.set('strictQuery', false);

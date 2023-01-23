@@ -1,31 +1,40 @@
 import './SinglePost.css';
-import React from 'react';
+import {useLocation } from 'react-router';
+import {Link} from "react-router-dom";
+import { useState, useEffect } from 'react';
 
 function SinglePost() {
+  const location = useLocation();  
+  const postID = location.pathname.replace('/post/','');
+  
+  const [post, setPost] = useState(false);
+
+  useEffect(()=>{
+    const fetchPost = async () => {
+      const response = await fetch(`http://localhost:3000/posts/${postID}`);
+      const data = await response.json();
+      setPost(data);
+    }
+    fetchPost();
+  },[])
+
   return (
     <div className='singlePost'>
       <div className="singlePostWrapper">
-        <img className='singlePostImage' src="/src/assets/seagull.jpg" alt="post_image" />
+        {post.image && (<img className='singlePostImage' src={post.image} alt="post_image" />)}
         <h1 className='singlePostTitle'>
-          Lorem ipsum dolor sit amet.
+          {post.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
             <i className="singlePostIcon fa-solid fa-trash"></i>
           </div>
         </h1>
         <div className="singlePostInfo">
-          <span className='singlePostAuthor'>Author: <b>Maciej</b></span>
-          <span className='singlePostDate'>1 hour ago</span>
+          <span className='singlePostAuthor'>Author: <Link className="link" to={`/?user=${post.username}`}>{post.username}</Link></span>
+          <span className='singlePostDate'>{new Date(post.createdAt).toDateString() }</span>
         </div>
         <p className='singePostDescription'>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-          Aperiam voluptate nihil sit voluptatum inventore delectus 
-          sunt incidunt, recusandae pariatur ipsum consectetur suscipit,
-           non iste perspiciatis debitis nam nostrum voluptatibus nobis 
-           autem minus modi ut amet repellat? Suscipit culpa excepturi ipsa
-            nam sit veritatis, nihil exercitationem eaque fugit id. Saepe 
-            voluptates molestias, quos rerum quis harum alias error assumenda 
-            dignissimos praesentium?
+          {post.desc}
         </p>
       </div>
     </div>
