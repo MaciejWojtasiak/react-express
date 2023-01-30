@@ -55,3 +55,6 @@
     background-color: #D87274;
     cursor: pointer;
 }
+.registerForm span {
+    align-self: center;
+}
