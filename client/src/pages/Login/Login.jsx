@@ -1,16 +1,17 @@
 import "./Login.css";
 import {Link} from "react-router-dom";
-import { useState } from "react";
+import { useRef, useContext } from "react";
+import {Context} from "../../context/Context";
+
 function Login() {
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
-  const [user, setUser] = useState('')
-
+  const userRef = useRef();
+  const passwordRef = useRef();
+  const { dispatch, isFetching} = useContext(Context);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(false);
+    dispatch("LOGIN_START");   
+      
     try {
       const response = await fetch("http://localhost:3000/auth/login", {
       method:'POST', 
@@ -19,14 +20,18 @@ function Login() {
         Accept: 'application.json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({"username":username, "password":password}),
+      body: JSON.stringify({username:userRef.current.value, password:passwordRef.current.value}),
       cache: 'default'
-    });
-    const data = await response.json();
-    setUser(data.username);
+    });     
+      const data = await response.json();
+      dispatch({type: "LOGIN_SUCCESS", payload: data});
+      userRef.current.value = '';
+      passwordRef.current.value = '';
+      window.location.replace('/');
     } catch (err) {
-      setError(true);
+      dispatch("LOGIN_FAILURE");
     }
+    
   }
 
   return (
@@ -35,11 +40,10 @@ function Login() {
         <form action="" className="loginForm" onSubmit={handleSubmit}>
             <h1 className="loginTitle">Login</h1>
             <label htmlFor="username">Username</label>
-            <input className="loginInput" type="text" id="username" autoFocus={true} onChange={e => {setEmail(e.target.value)}}/>
+            <input className="loginInput" type="text" id="username" autoFocus={true} ref={userRef}/>
             <label  htmlFor="password">Password</label>
-            <input className="loginInput" type="password" id="password" onChange={e => {setPassword(e.target.value)}}/>            
-            <button className="loginButton" type="submit">Login</button>
-            {error && <span>Something went wrong!</span>}
+            <input className="loginInput" type="password" id="password" ref={passwordRef}/>            
+            <button className="loginButton" type="submit" >Login</button>
         </form>
     </div>
   )

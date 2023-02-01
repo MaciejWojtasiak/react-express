@@ -1,8 +1,17 @@
 import "./Navbar.css";
 import {Link} from "react-router-dom";
+import { useContext } from "react";
+import {Context} from "../../context/Context";
 
-function Navbar() {
-    const user = false;
+function Navbar() {    
+
+    const {user, dispatch} = useContext(Context);
+
+    const handleLogout = () => {
+        dispatch({type:"LOGOUT"});
+        localStorage.removeItem('user');
+        window.location.replace('/');
+    }
   return (
     <div className="navbar">
         <div className="navLeft">
@@ -16,7 +25,7 @@ function Navbar() {
                 <li className="navListItem"><Link to='/about' className="link">ABOUT</Link></li>
                 <li className="navListItem"><Link to='/contact' className="link">CONTACT</Link></li>
                 <li className="navListItem"><Link to='/write' className="link">{user && "WRITE"}</Link></li>
-                <li className="navListItem"><Link to='/logout' className="link">{user && "LOGOUT"}</Link></li>
+                <li className="navListItem link" onClick={handleLogout}>{user && "LOGOUT"}</li>
             </ul>
         </div>
         <div className="navRight">

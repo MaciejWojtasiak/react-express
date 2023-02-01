@@ -7,9 +7,11 @@ import Write from "./pages/Write/Write";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import {BrowserRouter as Router, Routes,  Route} from "react-router-dom";
+import { useContext } from 'react';
+import {Context} from "../src/context/Context";
 
 function App() { 
-  const user = false;
+  const {user} = useContext(Context);
   
   return (
     <div className="App">   
