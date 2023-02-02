@@ -12,7 +12,6 @@ import {Context} from "../src/context/Context";
 
 function App() { 
   const {user} = useContext(Context);
-  
   return (
     <div className="App">   
     <Router>

@@ -29,7 +29,7 @@ function Navbar() {
             </ul>
         </div>
         <div className="navRight">
-            {user ? (<img src="https://media.istockphoto.com/id/1226886130/photo/3d-illustration-of-smiling-happy-man-with-laptop-sitting-in-armchair-cartoon-businessman.jpg?b=1&s=612x612&w=0&k=20&c=3l2mvXVqrSiU3593B897Yk-WYtpZ3xJhnmqI22dVhYQ=" alt="avatar" />) : (
+            {user ? (<img src={user.profilePic ? user.profilePic : "https://media.istockphoto.com/id/1226886130/photo/3d-illustration-of-smiling-happy-man-with-laptop-sitting-in-armchair-cartoon-businessman.jpg?b=1&s=612x612&w=0&k=20&c=3l2mvXVqrSiU3593B897Yk-WYtpZ3xJhnmqI22dVhYQ="} alt="avatar" />) : (
                 <>
                     <Link className="link" to="/login">LOGIN</Link>
                     <Link className="link" to="/register">REGISTER</Link>
