@@ -19,10 +19,11 @@ router.delete('/:id', async (req, res) => {
             try {
                 await post.delete();
                 res.status(200).json("Post have been deleted");
-
             } catch (err) {
                 res.status(500).json(err);
             }
+        } else {
+            res.status(500).json("You can't delete someone else post.");
         }
     } catch (err) {
         res.status(500).json(err)

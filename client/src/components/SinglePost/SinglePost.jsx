@@ -1,13 +1,15 @@
 import './SinglePost.css';
 import {useLocation } from 'react-router';
 import {Link} from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState, useEffect , useContext} from 'react';
+import { Context } from '../../context/Context';
+
 
 function SinglePost() {
   const location = useLocation();  
-  const postID = location.pathname.replace('/post/','');
-  
+  const postID = location.pathname.replace('/post/','');  
   const [post, setPost] = useState(false);
+  const {user} = useContext(Context); 
 
   useEffect(()=>{
     const fetchPost = async () => {
@@ -16,7 +18,28 @@ function SinglePost() {
       setPost(data);
     }
     fetchPost();
-  },[])
+  },[]);
+
+  const deletePost = async (e) => {
+    try {
+      const response = await fetch(`http://localhost:3000/posts/${postID}`, {
+        method:"DELETE",
+        mode:'cors',
+        headers: {
+          Accept: 'application.json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"username":user.username}),
+        cache: 'default',
+      });
+      const data = await response.json();
+      console.log(data)
+      response.ok && window.location.replace('/');
+
+    } catch (err) {
+      console.log(err);
+    };    
+  }
 
   return (
     <div className='singlePost'>
@@ -26,7 +49,7 @@ function SinglePost() {
           {post.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
-            <i className="singlePostIcon fa-solid fa-trash"></i>
+            <i className="singlePostIcon fa-solid fa-trash" onClick={deletePost}></i>
           </div>
         </h1>
         <div className="singlePostInfo">
