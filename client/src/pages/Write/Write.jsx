@@ -14,6 +14,22 @@ function Write() {
             username:user.username,
             title,
             desc
+        } 
+        if (file) {
+            const data = new FormData();
+            const filename = Date.now() + file.name;
+            data.append("name", filename);
+            data.append("file", file);
+            newPost.photo = filename;            
+            try {
+                const res = await fetch('http://localhost:3000/upload', {
+                    method:"POST",                    
+                    body:data
+                })
+            }   catch (err) {
+                console.log(err);
+            }      
+
         }
         try {
             const response = await fetch('http://localhost:3000/posts/', {
@@ -35,12 +51,13 @@ function Write() {
 
   return (
     <div className="write">
+         {file && (<img className="writeImg" src={URL.createObjectURL(file)} alt="post_image" />)} 
         <form className="writeForm" onSubmit={handleSubmit}>
             <div className="writeFormGroup">
                 <label htmlFor="fileInput">
                     <i className="writeIcon fa-regular fa-plus"></i>
                 </label>
-                <input type="file" id="fileInput" style={{display:"none"}} onChange={(e)=>{setFile(e.target.value)}}/>
+                <input type="file" id="fileInput" style={{display:"none"}} onChange={(e)=>{setFile(e.target.files[0])}}/>
                 <input type="text" placeholder="Title" id="titleInput" autoFocus={true} className="writeInput"  onChange={(e)=>{setTitle(e.target.value)}}/>
             </div>
             <div className="writeFormGroup">

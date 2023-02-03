@@ -6,6 +6,7 @@ import { Context } from '../../context/Context';
 
 
 function SinglePost() {
+  const PF = "http://localhost:3000/images/"
   const location = useLocation();  
   const postID = location.pathname.replace('/post/','');  
   const [post, setPost] = useState(false);
@@ -20,7 +21,7 @@ function SinglePost() {
     fetchPost();
   },[]);
 
-  const deletePost = async (e) => {
+  const deletePost = async () => {
     try {
       const response = await fetch(`http://localhost:3000/posts/${postID}`, {
         method:"DELETE",
@@ -32,19 +33,16 @@ function SinglePost() {
         body: JSON.stringify({"username":user.username}),
         cache: 'default',
       });
-      const data = await response.json();
-      console.log(data)
       response.ok && window.location.replace('/');
 
     } catch (err) {
       console.log(err);
     };    
   }
-
   return (
     <div className='singlePost'>
       <div className="singlePostWrapper">
-        {post.image && (<img className='singlePostImage' src={post.image} alt="post_image" />)}
+        {post.photo && (<img className='singlePostImage' src={PF + post.photo} alt="post_image" />)}
         <h1 className='singlePostTitle'>
           {post.title}
           <div className="singlePostEdit">

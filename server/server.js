@@ -11,6 +11,8 @@ const categoriesRoute = require('./routes/categories');
 app.use(cors({ origin: "http://localhost:5173" }))
 app.use(express.json())
 const multer = require("multer");
+const path = require('path');
+
 
 
 const storage = multer.diskStorage({
@@ -31,6 +33,8 @@ app.use('/users', usersRoute);
 app.use('/posts', postsRoute);
 app.use('/categories', categoriesRoute);
 
+
+app.use('/images', express.static(path.join(__dirname, '/images')))
 
 mongoose.set('strictQuery', false);
 mongoose
