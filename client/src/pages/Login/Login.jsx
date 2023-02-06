@@ -24,12 +24,17 @@ function Login() {
       cache: 'default'
     });     
       const data = await response.json();
-      response.ok && dispatch({type: "LOGIN_SUCCESS", payload: data});
-      userRef.current.value = '';
-      passwordRef.current.value = '';
-      window.location.replace('/');
+      if(!response.ok) {
+        alert(data);
+        dispatch({type:"LOGIN_FAILURE"})
+      } else {
+        dispatch({type: "LOGIN_SUCCESS", payload: data});
+        userRef.current.value = '';
+        passwordRef.current.value = '';
+        response.ok && window.location.replace('/');
+      }      
     } catch (err) {
-      console.log(err)
+      console.log(err);
       dispatch("LOGIN_FAILURE");
     }
     

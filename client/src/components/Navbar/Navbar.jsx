@@ -4,6 +4,7 @@ import { useContext } from "react";
 import {Context} from "../../context/Context";
 
 function Navbar() {    
+    const PF = 'http://localhost:3000/images/';
 
     const {user, dispatch} = useContext(Context);
 
@@ -29,7 +30,7 @@ function Navbar() {
             </ul>
         </div>
         <div className="navRight">
-            {user ? (<Link to="/settings"><img src={user.profilePic ? user.profilePic : "https://media.istockphoto.com/id/1226886130/photo/3d-illustration-of-smiling-happy-man-with-laptop-sitting-in-armchair-cartoon-businessman.jpg?b=1&s=612x612&w=0&k=20&c=3l2mvXVqrSiU3593B897Yk-WYtpZ3xJhnmqI22dVhYQ="} alt="avatar" /></Link>) : (
+            {user ? (<Link to="/settings"><img src={ user.profilePic ?PF + user.profilePic : "https://media.istockphoto.com/id/1226886130/photo/3d-illustration-of-smiling-happy-man-with-laptop-sitting-in-armchair-cartoon-businessman.jpg?b=1&s=612x612&w=0&k=20&c=3l2mvXVqrSiU3593B897Yk-WYtpZ3xJhnmqI22dVhYQ="} alt="avatar" /></Link>) : (
                 <>
                     <Link className="link" to="/login">LOGIN</Link>
                     <Link className="link" to="/register">REGISTER</Link>
