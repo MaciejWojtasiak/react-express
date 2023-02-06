@@ -10,7 +10,7 @@ function Login() {
   const { dispatch, isFetching} = useContext(Context);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch("LOGIN_START");   
+    dispatch("LOGIN_START");     
       
     try {
       const response = await fetch("http://localhost:3000/auth/login", {
@@ -24,11 +24,12 @@ function Login() {
       cache: 'default'
     });     
       const data = await response.json();
-      dispatch({type: "LOGIN_SUCCESS", payload: data});
+      response.ok && dispatch({type: "LOGIN_SUCCESS", payload: data});
       userRef.current.value = '';
       passwordRef.current.value = '';
       window.location.replace('/');
     } catch (err) {
+      console.log(err)
       dispatch("LOGIN_FAILURE");
     }
     
